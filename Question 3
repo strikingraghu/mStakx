@@ -1,0 +1,17 @@
+3 >> Create a development namespace.
+
+Solution -
+
+We can create a new namespace by running the below command.
+Command - kubectl create namespace development
+
+Additional Info -
+
+namespace
+Create a new namespace named my-namespace
+
+kubectl create namespace my-namespace
+Create a namespace with the specified name.
+
+Usage
+$ namespace NAME [--dry-run]
