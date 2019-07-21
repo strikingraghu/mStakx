@@ -1,0 +1,17 @@
+7 >> Create a monitoring namespace in the cluster
+
+Solution -
+
+We can create a new namespace by running the below command.
+Command - kubectl create namespace monitoring
+
+Additional Info -
+
+namespace
+Create a new namespace named my-namespace
+
+kubectl create namespace my-namespace
+Create a namespace with the specified name.
+
+Usage
+$ namespace NAME [--dry-run]
