@@ -1,0 +1,50 @@
+1 >> Create a Highly available Kubernetes cluster manually using Google Compute Engines (GCE). Do not create a Kubernetes hosted solution using Google Kubernetes Engine (GKE). Use Kubeadm(preferred)/kubespray.
+Do not use kops.
+
+
+
+Prerequisites
+
+Install gcloud as necessary. gcloud can be installed as a part of the Google Cloud SDK
+(https://cloud.google.com/sdk/)
+
+We need to have credentials for GCloud by running gcloud command
+Command - gcloud auth login
+
+One more thing, we can spin up a GCE VM from the command line.
+Command - gcloud compute instances create [INSTANCE_NAME] \
+--subnet [SUBNET_NAME] \
+--zone [ZONE_NAME] \
+--image-family [IMAGE_FAMILY] \
+--image-project [IMAGE_PROJECT] \
+--create-disk image=[DISK_IMAGE],image-project=[DISK_IMAGE_PROJECT],size=[SIZE_GB],type=[DISK_TYPE]
+
+
+Starting a cluster
+
+curl -sS https://get.k8s.io | bash
+By default, some containers will already be running on cluster. Containers like fluentd provide logging, while heapster provides monitoring services.
+If required, we can run more than one cluster in our project, or want to use a different name, or want a different number of worker nodes, then <kubernetes>/cluster/gce/config-default.sh file for more fine-grained configurations.
+
+
+Installing the Kubernetes command line tools on your workstation
+Command - kubectl get --all-namespaces services
+
+
+
+Inspection
+
+Once kubectl is in our path, we can use it to look at your cluster!
+
+kubectl get --all-namespaces services
+should show a set of services that look something like this:
+
+NAMESPACE     NAME          TYPE             CLUSTER_IP       EXTERNAL_IP       PORT(S)        AGE
+default       kubernetes    ClusterIP        10.0.0.1         <none>            443/TCP        1d
+kube-system   kube-dns      ClusterIP        10.0.0.2         <none>            53/TCP,53/UDP  1d
+kube-system   kube-ui       ClusterIP        10.0.0.3         <none>            80/TCP         1d
+...
+
+Similarly, we can take a look at the set of pods that were created during cluster startup.
+kubectl get --all-namespaces pods
+
